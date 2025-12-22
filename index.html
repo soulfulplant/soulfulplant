@@ -7,13 +7,16 @@
   <meta name="description" content="A living companion, not yet complete." />
   <link rel="stylesheet" href="assets/style.css">
 </head>
+
 <body>
   <div class="wrap">
+    <!-- Header -->
     <div class="header">
-      <a class="brand" href="/index.html">
-        <img src="assets/logo-mark.png" alt="The Soulful Plant Companion">
+      <a class="brand" href="/index.html" aria-label="The Soulful Plant Companion Home">
+        <img src="assets/logo-mark.png" alt="">
         <div class="name">The Soulful Plant Companion</div>
       </a>
+
       <div class="nav">
         <a href="/begin.html">Begin</a>
         <a href="/ritual.html">Ritual</a>
@@ -22,70 +25,72 @@
       </div>
     </div>
 
-    <span class="badge">Quiet self-care</span>
+    <!-- (2) Remove the badge/header label under the logo -->
     <h1>A living companion,<br/>not yet complete.</h1>
 
-    <div class="hero">
+    <!-- Main orientation card -->
+    <div class="card">
+      <p class="lede">
+        A young snake plant cutting, prepared by hand — designed to grow slowly and forgive neglect.
+      </p>
 
-      <!-- Orientation FIRST -->
-      <div class="card">
-        <p class="lede">
-          A young snake plant cutting, prepared by hand — designed to grow slowly and forgive neglect.
-        </p>
+      <p>
+        Most people buy plants hoping they’ll feel better… and then feel worse when they die.
+        This exists to remove that guilt.
+      </p>
 
-        <p>
-          Most people buy plants hoping they’ll feel better… and then feel worse when they die.
-          This exists to remove that guilt.
-        </p>
+      <p class="note">
+        You don’t need a routine. You don’t need to do it “right”.<br>
+        You just need a beginning.
+      </p>
 
-        <p class="note">
-          You don’t need a routine. You don’t need to do it “right”.<br>
-          You just need a beginning.
-        </p>
+      <!-- (3) More attractive button (uses .btn-primary from CSS change below) -->
+      <a class="btn btn-primary" href="/begin.html">Begin</a>
 
-        <a class="btn" href="/begin.html">Begin</a>
+      <hr>
 
-        <hr>
-
-        <p class="fine">
-          Already have a kit? The QR code leads here: <a href="/ritual.html">The Ritual</a>.
-        </p>
-      </div>
-
-      <!-- Image AFTER meaning -->
-      <div class="hero-img" style="margin-top:16px;">
-        <img src="assets/plant-full.jpeg" alt="A young snake plant">
-      </div>
-
-      <!-- Details BELOW -->
-      <div class="grid" style="margin-top:16px;">
-        <div class="card">
-          <h2>What arrives</h2>
-          <ul>
-            <li>One cured snake plant cutting (unfinished on purpose)</li>
-            <li>Charcoal succulent soil (measured, bagged)</li>
-            <li>A small monthly dose of seaweed tonic</li>
-            <li>A simple ritual page for guidance + reassurance</li>
-          </ul>
-          <p class="fine">
-            It’s quiet. It’s small. It takes time. That’s the point.
-          </p>
-        </div>
-
-        <div class="card">
-          <h2>Why snake plant</h2>
-          <p class="fine">
-            It tolerates neglect, prefers dry soil, and grows at its own pace — ideal for anxious beginners.
-          </p>
-          <hr>
-          <p class="fine">
-            In winter (UK), place it close to a window for the extra daylight.
-          </p>
-        </div>
-      </div>
-
+      <p class="fine">
+        Already have a kit? The QR code leads here: <a href="/ritual.html">The Ritual</a>.
+      </p>
     </div>
 
+    <!-- Details -->
+    <div class="grid" style="margin-top:16px;">
+      <div class="card">
+        <h2>What arrives</h2>
+        <ul>
+          <li>One cured snake plant cutting (unfinished on purpose)</li>
+          <li>Charcoal succulent soil (measured, bagged)</li>
+          <li>A small monthly dose of seaweed tonic</li>
+          <li>A simple ritual page for guidance + reassurance</li>
+        </ul>
+        <p class="fine">
+          Quiet. Small. Slow. Designed to be forgiving.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Why snake plant</h2>
+        <p class="fine">
+          It tolerates neglect, prefers dry soil, and grows at its own pace — ideal for anxious beginners.
+        </p>
+        <hr>
+        <p class="fine">
+          In winter (UK), place it close to a window for extra daylight.
+        </p>
+         <hr>
+        <p class="fine">
+          Keep in your bedroom - They releases oxygen at night, providing you fresh air while you snooze.
+        </p>
+      </div>
+    </div>
+
+    <!-- (4) Move image to the very end (above footer) -->
+    <div class="hero-img" style="margin-top:18px;">
+      <img src="assets/plant-full.jpeg" alt="The Soulful Plant Companion">
+    </div>
+
+    <!-- Footer -->
     <div class="footer">
       <a href="/begin.html">Begin</a> · <a href="/ritual.html">Ritual</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a><br>
       © The Soulful Plant Companion
