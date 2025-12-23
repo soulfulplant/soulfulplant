@@ -31,9 +31,30 @@
         You don’t need a green thumb. You don’t need consistency.
         This plant does well with being left alone.
       </p>
-<figure class="media">
-  <img src="assets/PlantPackage.jpeg" alt="Soulful Plant Companion kit: leaves wrapped and placed in the box">
-</figure>
+<section class="carousel" aria-label="Product photos">
+  <div class="carousel__stage">
+    <img id="slideImage" src="assets/PlantPackage.jpeg" alt="Leaves packaged in the box">
+  </div>
+
+  <div class="carousel__controls">
+    <button type="button" class="carousel__btn" onclick="setSlide(0)">In the box</button>
+    <button type="button" class="carousel__btn" onclick="setSlide(1)">Full kit</button>
+  </div>
+</section>
+
+<script>
+  const slides = [
+    { src: "assets/PlantPackage.jpeg", alt: "Leaves packaged in the box" },
+    { src: "assets/Plant Kit.jpg", alt: "Full kit laid out" }
+  ];
+
+  function setSlide(i) {
+    const img = document.getElementById("slideImage");
+    img.src = slides[i].src;
+    img.alt = slides[i].alt;
+  }
+</script>
+
 
       <p><strong>Price:</strong> £24.99</p>
       <p class="fine">Small batches. Prepared by hand. When orders open, typical dispatch is 5–7 working days.</p>
