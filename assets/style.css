@@ -238,14 +238,25 @@ input:focus{
   color:var(--ink);
   border-bottom:1px solid var(--line);
 }
-.media {
-  margin: 18px 0;
+/* Smaller media blocks (half-size feel) */
+.media--small img,
+.media--small video {
+  max-width: 520px;
 }
 
-.media img,
-.media video {
+/* Simple carousel */
+.carousel {
+  margin: 18px 0 6px;
+}
+
+.carousel__stage {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel__stage img {
   width: 100%;
-  max-width: 720px;
+  max-width: 520px; /* half-size feel */
   height: auto;
   display: block;
   border-radius: 14px;
@@ -253,11 +264,27 @@ input:focus{
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-.caption {
-  max-width: 720px;
+.carousel__controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   margin-top: 10px;
-  font-size: 0.95rem;
-  opacity: 0.8;
+}
+
+.carousel__btn {
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.35);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.carousel__btn:hover {
+  background: rgba(70, 98, 78, 0.10); /* your sage-ish hover */
+  border-color: rgba(70, 98, 78, 0.30);
+  transform: translateY(-1px);
 }
 
 /* =========================
