@@ -14,12 +14,14 @@
         <img src="assets/logo-mark.png" alt="The Soulful Plant Companion">
         <div class="name">The Soulful Plant Companion</div>
       </a>
+
       <div class="nav">
         <a href="/ritual.html">Ritual</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
       </div>
     </div>
+
     <h1>A young snake plant,<br/>ready to begin.</h1>
 
     <div class="card">
@@ -31,30 +33,37 @@
         You don’t need a green thumb. You don’t need consistency.
         This plant does well with being left alone.
       </p>
-<section class="carousel" aria-label="Product photos">
-  <div class="carousel__stage">
-    <img id="slideImage" src="assets/PlantPackage.jpeg" alt="Leaves packaged in the box">
-  </div>
 
-  <div class="carousel__controls">
-    <button type="button" class="carousel__btn" onclick="setSlide(0)"></button>
-    <button type="button" class="carousel__btn" onclick="setSlide(1)"></button>
-  </div>
-</section>
+      <!-- Carousel (fixed stage height so the page doesn't jump) -->
+      <section class="carousel" aria-label="Product photos">
+        <div class="carousel__stage">
+          <img id="carouselImage" src="assets/PlantPackage.jpeg" alt="Leaves packaged in the box" loading="eager">
+        </div>
 
-<script>
-  const slides = [
-    { src: "assets/PlantPackage.jpeg", alt: "Leaves packaged in the box" },
-    { src: "assets/Plant Kit.jpg", alt: "Full kit laid out" }
-  ];
+        <div class="carousel__controls" aria-label="Carousel controls">
+          <button type="button" class="carousel__btn" onclick="setSlide(0)" aria-label="View packaged leaves"></button>
+          <button type="button" class="carousel__btn" onclick="setSlide(1)" aria-label="View full kit"></button>
+        </div>
+      </section>
 
-  function setSlide(i) {
-    const img = document.getElementById("slideImage");
-    img.src = slides[i].src;
-    img.alt = slides[i].alt;
-  }
-</script>
+      <script>
+        const slides = [
+          { src: "assets/PlantPackage.jpeg", alt: "Leaves packaged in the box" },
+          { src: "assets/Plant Kit.jpg", alt: "Full kit laid out" }
+        ];
 
+        // Preload to prevent pop-in / layout shimmer
+        slides.forEach(s => { const img = new Image(); img.src = s.src; });
+
+        let current = 0;
+
+        function setSlide(i) {
+          current = (i + slides.length) % slides.length;
+          const img = document.getElementById("carouselImage");
+          img.src = slides[current].src;
+          img.alt = slides[current].alt;
+        }
+      </script>
 
       <p><strong>Price:</strong> £24.99</p>
       <p class="fine">Small batches. Prepared by hand. When orders open, typical dispatch is 5–7 working days.</p>
@@ -66,7 +75,7 @@
 
       <form action="mailto:soulfulplant@gmail.com?subject=Soulful%20Plant%20Waitlist&body=Please%20notify%20me%20when%20the%20first%20batch%20opens.%0A%0AEmail%3A%20" method="post" enctype="text/plain">
         <input type="email" name="email" placeholder="your email address" required />
-        <button class="btn" type="submit">Notify me</button>
+        <button class="btn btn-primary" type="submit">Notify me</button>
       </form>
 
       <p class="fine" style="margin-top:12px;">
