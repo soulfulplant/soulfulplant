@@ -238,11 +238,29 @@ input:focus{
   color:var(--ink);
   border-bottom:1px solid var(--line);
 }
-/* Smaller media blocks (half-size feel) */
-.media--small img,
-.media--small video {
-  max-width: 520px;
+/* Ritual video styling */
+.ritual-video {
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 9 / 16;
+  height: auto;
+  display: block;
+  margin: 24px auto;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  background: #000;
+  object-fit: cover;
 }
+
+/* Mobile refinement */
+@media (max-width: 560px) {
+  .ritual-video {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+}
+
 
 /* Simple carousel */
 .carousel {
