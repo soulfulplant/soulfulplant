@@ -242,12 +242,12 @@ input:focus{
 /* Ritual video styling (autoplay-friendly + centered) */
 .ritual-video{
   width:100%;
-  max-width:720px;
-  aspect-ratio: 9 / 16;   /* your video is vertical */
+  max-width:420px;          /* ✅ smaller */
+  aspect-ratio: 9 / 16;
   height:auto;
   display:block;
-  margin: 24px auto;
-  border-radius:14px;     /* ✅ the change you asked about */
+  margin: 18px auto;        /* slightly less vertical space */
+  border-radius:14px;
   border:1px solid rgba(0,0,0,0.12);
   box-shadow:0 10px 24px rgba(0,0,0,0.08);
   background:#000;
@@ -272,28 +272,83 @@ input:focus{
   border-bottom:1px solid var(--line);
 }
 
-/* =========================
-   Simple carousel
-   ========================= */
 
-.carousel{
-  margin:18px 0 6px;
-}
 
 .carousel__stage{
   display:flex;
   justify-content:center;
 }
 
-.carousel__stage img{
-  width:100%;
-  max-width:520px; /* half-size feel */
-  height:auto;
-  display:block;
-  border-radius:14px;
-  border:1px solid rgba(0,0,0,0.08);
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+/* =========================
+   Carousel (no page-jump)
+   ========================= */
+
+.carousel {
+  margin: 18px 0 6px;
 }
+
+/* Fixed stage height so page doesn't move */
+.carousel__stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;      /* keep your half-size feel */
+  margin: 0 auto;
+
+  height: 340px;         /* desktop stage height (adjust if you want) */
+  border-radius: 14px;
+  overflow: hidden;      /* important: clips image edges */
+  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.12);
+}
+
+/* All carousel images fill the same stage */
+.carousel__stage img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;     /* crop to fill (prevents jumping) */
+  object-position: center;
+}
+
+/* If you prefer “no crop”, use contain instead:
+.carousel__stage img { object-fit: contain; background: rgba(255,255,255,0.12); }
+*/
+
+.carousel__controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.carousel__btn {
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.35);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.carousel__btn:hover {
+  background: rgba(70, 98, 78, 0.10);
+  border-color: rgba(70, 98, 78, 0.30);
+  transform: translateY(-1px);
+}
+
+/* Mobile: slightly taller stage (most images are portrait) */
+@media (max-width: 560px) {
+  .carousel__stage {
+    max-width: 100%;
+    height: 420px;       /* mobile stage height */
+    border-radius: 12px;
+  }
+}
+
 
 .carousel__controls{
   display:flex;
