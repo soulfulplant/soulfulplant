@@ -1,3 +1,7 @@
+/* ✅ FULL assets/style.css (copy + replace entire file)
+   Update included: ritual video + media/figure styling tightened and consistent
+*/
+
 :root{
   /* Refined brand palette */
   --bg:#E6DAC8;              /* site background */
@@ -40,7 +44,7 @@ body{
   align-items:center;
   justify-content:space-between;
   gap:16px;
-  margin-bottom: 18px; /* reduced */
+  margin-bottom: 18px;
 }
 
 .brand{
@@ -121,7 +125,7 @@ p, li{
   background:var(--surface);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:30px;               /* bigger */
+  padding:30px;
   box-shadow:var(--shadow);
 }
 
@@ -206,9 +210,23 @@ input:focus{
 }
 
 /* =========================
-   Images
+   Media (images / video / figure)
    ========================= */
 
+/* Figure wrapper used across site */
+.media{
+  margin: 18px 0;
+}
+
+/* Captions under images/video */
+.caption{
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+/* Hero image block */
 .hero-img{
   margin-top:22px;
   border-radius:var(--radius);
@@ -219,6 +237,21 @@ input:focus{
 .hero-img img{
   width:100%;
   display:block;
+}
+
+/* Ritual video styling (autoplay-friendly + centered) */
+.ritual-video{
+  width:100%;
+  max-width:720px;
+  aspect-ratio: 9 / 16;   /* your video is vertical */
+  height:auto;
+  display:block;
+  margin: 24px auto;
+  border-radius:14px;     /* ✅ the change you asked about */
+  border:1px solid rgba(0,0,0,0.12);
+  box-shadow:0 10px 24px rgba(0,0,0,0.08);
+  background:#000;
+  object-fit:cover;
 }
 
 /* =========================
@@ -238,69 +271,49 @@ input:focus{
   color:var(--ink);
   border-bottom:1px solid var(--line);
 }
-/* Ritual video styling */
-.ritual-video {
-  width: 100%;
-  max-width: 720px;
-  aspect-ratio: 9 / 16;
-  height: auto;
-  display: block;
-  margin: 24px auto;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.12);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
-  background: #000;
-  object-fit: cover;
+
+/* =========================
+   Simple carousel
+   ========================= */
+
+.carousel{
+  margin:18px 0 6px;
 }
 
-/* Mobile refinement */
-@media (max-width: 560px) {
-  .ritual-video {
-    max-width: 100%;
-    border-radius: 12px;
-  }
+.carousel__stage{
+  display:flex;
+  justify-content:center;
 }
 
-
-/* Simple carousel */
-.carousel {
-  margin: 18px 0 6px;
+.carousel__stage img{
+  width:100%;
+  max-width:520px; /* half-size feel */
+  height:auto;
+  display:block;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
 
-.carousel__stage {
-  display: flex;
-  justify-content: center;
+.carousel__controls{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:10px;
 }
 
-.carousel__stage img {
-  width: 100%;
-  max-width: 520px; /* half-size feel */
-  height: auto;
-  display: block;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.carousel__controls {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.carousel__btn {
-  border: 1px solid rgba(0,0,0,0.12);
-  background: rgba(255,255,255,0.35);
-  padding: 10px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  font: inherit;
+.carousel__btn{
+  border:1px solid rgba(0,0,0,0.12);
+  background:rgba(255,255,255,0.35);
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  font:inherit;
   transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
 }
 
-.carousel__btn:hover {
-  background: rgba(70, 98, 78, 0.10); /* your sage-ish hover */
+.carousel__btn:hover{
+  background: rgba(70, 98, 78, 0.10); /* sage-ish hover */
   border-color: rgba(70, 98, 78, 0.30);
   transform: translateY(-1px);
 }
@@ -322,4 +335,10 @@ input:focus{
   }
   .brand img{ width:120px; }
   h1{ font-size:36px; }
+
+  /* Mobile refinement for ritual video */
+  .ritual-video{
+    max-width:100%;
+    border-radius:12px;
+  }
 }
