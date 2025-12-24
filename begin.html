@@ -74,13 +74,33 @@ Snake plants (Dracaena trifasciata) are forgiving by nature, but like all compan
       <p><strong>First batch:</strong> not yet open.</p>
       <p class="fine">Leave your email if you’d like a quiet message when it’s ready.</p>
 
-   <a
-  href="mailto:soulfulplant@gmail.com?subject=Ritual%20Kit%20Availability&body=I%20would%20like%20to%20purchase%20a%20ritual%20kit.%20Please%20let%20me%20know%20once%20they%20are%20available."
-  class="notify-btn"
->
-  Notify Me
-</a>
+ <form id="notifyForm">
+  <input type="email" id="customerEmail" required placeholder="Enter your email" />
+  <button type="submit">Notify Me</button>
+</form>
 
+<script>
+document.getElementById("notifyForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const customerEmail = document.getElementById("customerEmail").value.trim();
+
+  const to = "soulfulplant@gmail.com";
+  const subject = "Ritual Kit Availability";
+  const body =
+    `I would like to purchase a ritual kit. Please let me know once they are available.\n\n` +
+    `Customer email: ${customerEmail}`;
+
+  const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  window.location.href = mailto;
+});
+</script>
+
+<p>
+  Trouble with the button? Email us at
+  <a href="mailto:soulfulplant@gmail.com">soulfulplant@gmail.com</a>
+</p>
       <p class="fine" style="margin-top:12px;">
         Prefer not to share your email? You can check back later.
       </p>
