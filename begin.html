@@ -74,13 +74,41 @@ Snake plants (Dracaena trifasciata) are forgiving by nature, but like all compan
       <p><strong>First batch:</strong> not yet open.</p>
       <p class="fine">Leave your email if you’d like a quiet message when it’s ready.</p>
 
-      <form action="mailto:soulfulplant@gmail.com?subject=Soulful%20Plant%20Waitlist&body=Please%20notify%20me%20when%20the%20first%20batch%20opens.%0A%0AEmail%3A%20" method="post" enctype="text/plain">
-        <input type="email" name="email" placeholder="your email address" required />
-        <button class="btn btn-primary" type="submit">Notify me</button>
-      </form>
+     <form id="notifyForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <input type="email" name="email" placeholder="Enter your email" required />
+  <input type="hidden" name="product" value="Ritual Kit" />
+  <input type="hidden" name="message"
+    value="I would like to purchase a ritual kit. Please let me know once they are available." />
+  <button type="submit">Notify Me</button>
+  <p id="status" style="margin-top:10px;"></p>
+</form>
+
+<script>
+  const form = document.getElementById("notifyForm");
+  const status = document.getElementById("status");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.textContent = "Sending...";
+
+    const data = new FormData(form);
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    });
+
+    if (res.ok) {
+      form.reset();
+      status.textContent = "Thanks! We’ll notify you when it’s back in stock.";
+    } else {
+      status.textContent = "Sorry—something went wrong. Please try again.";
+    }
+  });
+</script>
 
       <p class="fine" style="margin-top:12px;">
-        Prefer not to share email? You can check back later.
+        Prefer not to share your email? You can check back later.
       </p>
 
       <p class="fine" style="margin-top:10px;">
