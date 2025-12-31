@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://soulfulplant.co.uk/sitemap.xml
