@@ -372,7 +372,33 @@ input:focus{
   border-color: rgba(70, 98, 78, 0.30);
   transform: translateY(-1px);
 }
+/* Textual Begin link */
+.begin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+
+  border-bottom: 1px solid rgba(147,131,96,.35);
+  padding-bottom: 2px;
+
+  transition: color .15s ease, border-color .15s ease, gap .15s ease;
+}
+
+.begin-link:hover {
+  color: var(--muted);
+  border-bottom-color: rgba(147,131,96,.7);
+  gap: 10px; /* arrow subtly moves right */
+}
+
+.begin-link .arrow {
+  font-size: 18px;
+  line-height: 1;
+}
 /* =========================
    Responsive
    ========================= */
