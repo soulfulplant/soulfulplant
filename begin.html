@@ -70,41 +70,32 @@ Snake plants (Dracaena trifasciata) are forgiving by nature, but like all compan
       <p><strong>Price:</strong> £24.99</p>
       <p class="fine">Small batches. Prepared by hand. When orders open, typical dispatch is 5–7 working days.</p>
 
-      <hr>
 
-      <p><strong>First batch:</strong> not yet open.</p>
-      <p class="fine">Leave your email if you’d like a quiet message when it’s ready.</p>
+<hr>
 
- <form id="notifyForm">
-  <input type="email" id="customerEmail" required placeholder="Enter your email" />
-  <button type="submit">Notify Me</button>
-</form>
+<p><strong>Next batch:</strong> not yet open.</p>
+<p class="fine">
+  Soul Baby is prepared in small batches. If you’d like a quiet message when the next one opens,
+  join the waiting list below.
+</p>
 
-<script>
-document.getElementById("notifyForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const customerEmail = document.getElementById("customerEmail").value.trim();
-
-  const to = "soulfulplant@gmail.com";
-  const subject = "Ritual Kit Availability";
-  const body =
-    `I would like to purchase a ritual kit. Please let me know once they are available.\n\n` +
-    `Customer email: ${customerEmail}`;
-
-  const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-  window.location.href = mailto;
-});
-</script>
+<div class="form-embed">
+  <iframe
+    src="https://docs.google.com/forms/d/e/1FAIpQLScI9rLeFdl4Gjzo0IRHPjhlxP72VEpB8DGo3e47HAFkDTJE5A/viewform?embedded=true"
+    loading="lazy"
+    referrerpolicy="no-referrer"
+  >
+    Loading…
+  </iframe>
+</div>
+<p class="fine">
+  Or email us: <a href="mailto:soulfulplant@gmail.com">soulfulplant@gmail.com</a>
+</p>
 
 <p class="fine" style="margin-top:12px;">
-  Trouble with the button? Email us at
-  <a href="mailto:soulfulplant@gmail.com">soulfulplant@gmail.com</a>
+  Prefer not to share your email? You can check back later.
 </p>
-      <p class="fine" style="margin-top:12px;">
-        Prefer not to share your email? You can check back later.
-      </p>
+      
 
       <p class="fine" style="margin-top:16px;">
         Already have a kit? Go to <a href="/ritual.html">The Ritual</a>.
