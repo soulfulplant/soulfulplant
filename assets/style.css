@@ -437,3 +437,65 @@ input:focus{
   }
    
 }
+/* =========================
+   Premium Parallax Hero (Option B)
+   ========================= */
+
+.parallax-hero{
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 46px 0 26px;
+  background-image: url("assets/hero-rooted-origin.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* Soft wash so your green typography stays readable */
+.parallax-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(230,218,200,.92) 0%,
+    rgba(230,218,200,.74) 50%,
+    rgba(230,218,200,.92) 100%
+  );
+  z-index: 1;
+}
+
+/* Keep the text above the wash */
+.parallax-hero__content{
+  position: relative;
+  z-index: 2;
+}
+
+/* Slightly tighten header spacing inside hero */
+.parallax-hero .header{
+  margin-bottom: 16px;
+}
+
+/* Give the H1 a bit more “hero” feel without changing text */
+.parallax-hero h1{
+  margin: 0 0 10px;
+}
+
+/* Parallax effect (desktop only for performance) */
+@media (min-width: 900px){
+  .parallax-hero{
+    background-attachment: fixed;
+  }
+}
+
+/* Mobile tuning */
+@media (max-width: 560px){
+  .parallax-hero{
+    min-height: 56vh;
+    padding: 30px 0 18px;
+    background-attachment: scroll;
+  }
+}
