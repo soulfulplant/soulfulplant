@@ -367,7 +367,7 @@ input:focus{
 /* The hero section only needs to provide “intro space”, NOT reserve 100vh above content */
 body.home .scrolly-hero{
   position: relative;
-  min-height: 64vh;   /* visible hero, but no blank “first screen” */
+  min-height: 92vh;   /* visible hero, but no blank “first screen” */
 }
 
 /* IMPORTANT FIX:
@@ -429,7 +429,7 @@ body.home .scrolly-hero__content{
 
 /* Runway still exists, but smaller — it just gives that “slow image” feel */
 body.home .scrolly-hero__runway{
-  height: 26vh;
+  height: 18vh;
 }
 
 /* =========================
@@ -457,7 +457,7 @@ body.home .scrolly-hero__runway{
 
   /* Mobile hero: reduce visible hero height so it never looks like a blank page */
   body.home .scrolly-hero{
-    min-height: 52vh;
+    min-height: 78svh;
   }
 
   body.home .scrolly-hero__media img{
@@ -465,7 +465,7 @@ body.home .scrolly-hero__runway{
   }
 
   body.home .scrolly-hero__runway{
-    height: 18vh;
+    height: 10svh;
   }
 
 
