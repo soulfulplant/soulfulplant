@@ -145,7 +145,7 @@ p, li{
 
 /* Lift ONLY the first card on the homepage so it overlaps hero nicely (no grid overlap) */
 body.home .scrolly-hero + .wrap > .card{
-  margin-top: -95px;
+  margin-top: -72px;
   position: relative;
   z-index: 3;
 }
@@ -468,7 +468,21 @@ body.home .scrolly-hero__runway{
     height: 18vh;
   }
 
-  body.home .scrolly-hero + .wrap > .card{
-    margin-top: -50px;
+
+}
+/* =========================
+   HOME: pull content up closer to the H1
+   (fixes the big gap reliably)
+   ========================= */
+
+body.home .scrolly-hero + .wrap{
+  margin-top: -95px;   /* increase/decrease this */
+}
+
+/* mobile: don’t pull as aggressively */
+@media (max-width: 560px){
+  body.home .scrolly-hero + .wrap{
+    margin-top: -48px;
   }
 }
+
