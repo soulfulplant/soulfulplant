@@ -1,15 +1,14 @@
 /* FULL assets/style.css
-   Baseline site styling + Carousel + Ritual video
-   PLUS: HOME ONLY Apple-style sticky scrolly hero + glass cards + safe lift (no overlap)
+   FIX: Home hero no longer creates blank space (sticky -> fixed background layer)
+   Keeps all existing site styling intact + glass cards
 */
 
 :root{
-  /* Refined brand palette */
-  --bg:#E6DAC8;              /* site background */
-  --surface:#E1D4B8;         /* calmer card tone */
-  --ink:#324D39;             /* deep green */
-  --muted:#62735D;           /* sage */
-  --accent:#938360;          /* clay */
+  --bg:#E6DAC8;
+  --surface:#E1D4B8;
+  --ink:#324D39;
+  --muted:#62735D;
+  --accent:#938360;
   --line:rgba(50,77,57,.22);
 
   --radius:20px;
@@ -34,6 +33,8 @@ body{
   max-width: 980px;
   margin: 0 auto;
   padding: 22px 18px 70px;
+  position: relative;
+  z-index: 2; /* keep content above any background layers */
 }
 
 /* =========================
@@ -82,7 +83,6 @@ body{
   text-decoration:none;
   border-bottom:1px solid transparent;
 }
-
 .nav a:hover{
   color:var(--ink);
   border-bottom:1px solid var(--line);
@@ -134,11 +134,20 @@ p, li{
    ========================= */
 
 .card{
-  background:var(--surface);
-  border:1px solid var(--line);
+  background: rgba(225,212,184,0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border:1px solid rgba(50,77,57,.18);
   border-radius:var(--radius);
   padding:30px;
   box-shadow:var(--shadow);
+}
+
+/* Lift ONLY the first card on the homepage so it overlaps hero nicely (no grid overlap) */
+body.home .scrolly-hero + .wrap > .card{
+  margin-top: -56px;
+  position: relative;
+  z-index: 3;
 }
 
 .grid{
@@ -162,7 +171,6 @@ a{
   text-decoration:none;
   border-bottom:1px solid rgba(147,131,96,.35);
 }
-
 a:hover{
   border-bottom-color:rgba(147,131,96,.7);
 }
@@ -193,20 +201,16 @@ a:hover{
   transform:none;
 }
 
-/* Textual Begin link */
 .begin-link{
   display: inline-flex;
   align-items: center;
   gap: 6px;
-
   font-size: 18px;
   font-weight: 500;
   color: var(--ink);
   text-decoration: none;
-
   border-bottom: 1px solid rgba(147,131,96,.35);
   padding-bottom: 2px;
-
   transition: color .15s ease, border-color .15s ease, gap .15s ease;
 }
 
@@ -233,16 +237,12 @@ input{
   background:rgba(255,255,255,.5);
   font-size:16px;
 }
-
 input:focus{
   outline:none;
   border-color:rgba(147,131,96,.65);
 }
 
-.form-embed{
-  margin-top: 18px;
-}
-
+.form-embed{ margin-top: 18px; }
 .form-embed iframe{
   width: 100%;
   height: 680px;
@@ -271,7 +271,6 @@ input:focus{
   box-shadow:var(--shadow);
   overflow:hidden;
 }
-
 .hero-img img{
   width:100%;
   display:block;
@@ -300,12 +299,10 @@ input:focus{
   font-size:13px;
   color:var(--muted);
 }
-
 .footer a{
   color:var(--muted);
   border-bottom:1px solid transparent;
 }
-
 .footer a:hover{
   color:var(--ink);
   border-bottom:1px solid var(--line);
@@ -324,12 +321,11 @@ input:focus{
   width:100%;
   max-width:520px;
   margin:0 auto;
-
   height:340px;
   border-radius:14px;
   overflow:hidden;
   border:1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
   background: rgba(255,255,255,0.12);
 }
 
@@ -365,6 +361,78 @@ input:focus{
 }
 
 /* =========================
+   HOME: Apple-style scrolly hero (FIXED)
+   ========================= */
+
+/* The hero section only needs to provide “intro space”, NOT reserve 100vh above content */
+body.home .scrolly-hero{
+  position: relative;
+  min-height: 64vh;   /* visible hero, but no blank “first screen” */
+}
+
+/* IMPORTANT FIX:
+   make the media FIXED (not sticky) so it doesn't push content down */
+body.home .scrolly-hero__media{
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Image fill */
+body.home .scrolly-hero__media img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: scale(1.03);
+}
+
+/* Wash overlay for legibility */
+body.home .scrolly-hero__wash{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(230,218,200,.78) 0%,
+    rgba(230,218,200,.54) 45%,
+    rgba(230,218,200,.90) 100%
+  );
+}
+
+/* Content sits above the fixed media */
+body.home .scrolly-hero__content{
+  position: relative;
+  z-index: 2;
+  padding-top: 18px;
+  padding-bottom: 12px;
+}
+
+/* Optional scroll hint (tiny bouncing dot) */
+.scroll-hint{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(50,77,57,.35);
+  margin-top: 14px;
+  animation: scrollHint 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollHint{
+  0%, 100% { transform: translateY(0); opacity: .55; }
+  50% { transform: translateY(10px); opacity: .25; }
+}
+
+/* Runway still exists, but smaller — it just gives that “slow image” feel */
+body.home .scrolly-hero__runway{
+  height: 26vh;
+}
+
+/* =========================
    Responsive
    ========================= */
 
@@ -379,7 +447,6 @@ input:focus{
     align-items:flex-start;
     gap:8px;
   }
-
   .brand img{ width:120px; }
   h1{ font-size:36px; }
 
@@ -388,140 +455,13 @@ input:focus{
     border-radius:12px;
   }
 
-  .carousel__stage{
-    max-width:100%;
-    height:420px;
-    border-radius:12px;
-  }
-}
-
-/* ==========================================================
-   HOME ONLY: Sticky scrolly hero (fixed: no blank space)
-   ========================================================== */
-
-/* Hero should be ~one screen, not extra tall */
-body.home .scrolly-hero{
-  position: relative;
-  overflow: clip;
-  min-height: 100svh; /* exactly one screen on modern mobile */
-}
-
-/* Sticky image behind content */
-body.home .scrolly-hero__media{
-  position: sticky;
-  top: 0;
-  height: 100svh;
-  width: 100%;
-  z-index: 0;
-}
-
-body.home .scrolly-hero__media img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-
-  /* show the interesting part higher up (reduces blank “sky”) */
-  object-position: center 22%;
-
-  transform: scale(1.04);
-}
-
-body.home .scrolly-hero__wash{
-  position:absolute;
-  inset:0;
-  background: linear-gradient(
-    to bottom,
-    rgba(230,218,200,.78) 0%,
-    rgba(230,218,200,.52) 45%,
-    rgba(230,218,200,.88) 100%
-  );
-}
-
-/* Put header/title immediately visible */
-body.home .scrolly-hero__content{
-  position: relative;
-  z-index: 1;
-
-  /* IMPORTANT: don’t let the hero content drift down */
-  padding-top: 14px;
-  padding-bottom: 0;
-
-  /* keep it near the top, not vertically centered */
-  display: block;
-}
-
-/* Tighten hero title spacing */
-body.home .scrolly-hero h1{
-  margin: 4px 0 0;
-}
-
-/* Runway should be small (still gives “Apple” feel without emptiness) */
-body.home .scrolly-hero__runway{
-  height: 24vh;
-}
-
-/* Glass cards only on home */
-body.home .card{
-  background: rgba(225,212,184,0.72);
-  border: 1px solid rgba(50,77,57,.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-/* Lift first card into the hero so page doesn’t feel split */
-body.home .scrolly-hero + .wrap{
-  padding-top: 0;
-}
-
-body.home .scrolly-hero + .wrap > .card{
-  transform: translateY(-72px);
-  position: relative;
-  z-index: 3;
-}
-
-/* Scroll hint stays visible and subtle */
-body.home .scroll-hint{
-  width: 34px;
-  height: 34px;
-  margin-top: 14px;
-  opacity: 0.55;
-  position: relative;
-}
-
-body.home .scroll-hint::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:4px;
-  width:10px;
-  height:10px;
-  border-right:2px solid rgba(50,77,57,.55);
-  border-bottom:2px solid rgba(50,77,57,.55);
-  transform: translateX(-50%) rotate(45deg);
-  animation: scrollHint 1.4s ease-in-out infinite;
-}
-
-@keyframes scrollHint{
-  0%   { transform: translate(-50%, 0) rotate(45deg); opacity:.25; }
-  50%  { transform: translate(-50%, 10px) rotate(45deg); opacity:.7; }
-  100% { transform: translate(-50%, 0) rotate(45deg); opacity:.25; }
-}
-
-/* Mobile tuning: reduce lift slightly so it doesn’t collide */
-@media (max-width:560px){
+  /* Mobile hero: reduce visible hero height so it never looks like a blank page */
   body.home .scrolly-hero{
-    min-height: 92svh;
-  }
-
-  body.home .scrolly-hero__media{
-    height: 92svh;
+    min-height: 52vh;
   }
 
   body.home .scrolly-hero__media img{
-    object-position: center 16%;
-    transform: scale(1.06);
+    object-position: center 22%;
   }
 
   body.home .scrolly-hero__runway{
@@ -529,6 +469,6 @@ body.home .scroll-hint::before{
   }
 
   body.home .scrolly-hero + .wrap > .card{
-    transform: translateY(-42px);
+    margin-top: -28px;
   }
 }
