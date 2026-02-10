@@ -412,19 +412,68 @@ body.home .scrolly-hero__content{
   padding-bottom: 12px;
 }
 
-/* Optional scroll hint (tiny bouncing dot) */
+/* =========================
+   Scroll hint (chevron)
+   ========================= */
+
 .scroll-hint{
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(50,77,57,.35);
-  margin-top: 14px;
-  animation: scrollHint 1.6s ease-in-out infinite;
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
-@keyframes scrollHint{
-  0%, 100% { transform: translateY(0); opacity: .55; }
-  50% { transform: translateY(10px); opacity: .25; }
+/* Chevron shape */
+.scroll-hint::before,
+.scroll-hint::after{
+  content:"";
+  position:absolute;
+  width:14px;
+  height:2px;
+  background: var(--ink);
+  top: 10px;
+}
+
+.scroll-hint::before{
+  left: 0;
+  transform: rotate(45deg);
+}
+
+.scroll-hint::after{
+  right: 0;
+  transform: rotate(-45deg);
+}
+
+/* Gentle downward drift */
+.scroll-hint{
+  animation: chevron-float 2.2s ease-in-out infinite;
+}
+
+@keyframes chevron-float{
+  0%{
+    transform: translate(-50%, 0);
+    opacity: 0.35;
+  }
+  50%{
+    transform: translate(-50%, 8px);
+    opacity: 0.65;
+  }
+  100%{
+    transform: translate(-50%, 0);
+    opacity: 0.35;
+  }
+}
+
+/* Slightly subtler on mobile */
+@media (max-width: 560px){
+  .scroll-hint{
+    bottom: 14px;
+    opacity: 0.45;
+  }
 }
 
 /* Runway still exists, but smaller — it just gives that “slow image” feel */
