@@ -396,17 +396,17 @@ input:focus{
 }
 
 /* ==========================================================
-   HOME ONLY: Apple-style sticky scrolly hero + glass cards
-   Requires: <body class="home"> (you already have this)
+   HOME ONLY: Sticky scrolly hero (fixed: no blank space)
    ========================================================== */
 
-/* Hero wrapper */
+/* Hero should be ~one screen, not extra tall */
 body.home .scrolly-hero{
   position: relative;
   overflow: clip;
+  min-height: 100svh; /* exactly one screen on modern mobile */
 }
 
-/* Sticky background layer */
+/* Sticky image behind content */
 body.home .scrolly-hero__media{
   position: sticky;
   top: 0;
@@ -421,102 +421,114 @@ body.home .scrolly-hero__media img{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position: center 30%;
+
+  /* show the interesting part higher up (reduces blank “sky”) */
+  object-position: center 22%;
+
   transform: scale(1.04);
 }
 
-/* Readability wash */
 body.home .scrolly-hero__wash{
   position:absolute;
   inset:0;
   background: linear-gradient(
     to bottom,
-    rgba(230,218,200,.82) 0%,
-    rgba(230,218,200,.55) 45%,
-    rgba(230,218,200,.90) 100%
+    rgba(230,218,200,.78) 0%,
+    rgba(230,218,200,.52) 45%,
+    rgba(230,218,200,.88) 100%
   );
 }
 
-/* Hero content */
+/* Put header/title immediately visible */
 body.home .scrolly-hero__content{
   position: relative;
   z-index: 1;
-  padding-top: calc(18px + env(safe-area-inset-top));
-  padding-bottom: 10px;
+
+  /* IMPORTANT: don’t let the hero content drift down */
+  padding-top: 14px;
+  padding-bottom: 0;
+
+  /* keep it near the top, not vertically centered */
+  display: block;
 }
 
+/* Tighten hero title spacing */
 body.home .scrolly-hero h1{
-  margin: 6px 0 0;
+  margin: 4px 0 0;
 }
 
-/* The runway creates the “Apple slow scroll” feel */
+/* Runway should be small (still gives “Apple” feel without emptiness) */
 body.home .scrolly-hero__runway{
-  height: 55vh;
+  height: 24vh;
 }
 
-/* Glass cards (only on home so other pages keep solid cards) */
+/* Glass cards only on home */
 body.home .card{
   background: rgba(225,212,184,0.72);
-  border:1px solid rgba(50,77,57,.18);
+  border: 1px solid rgba(50,77,57,.18);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* Lift the first card safely (no overlap issues) */
+/* Lift first card into the hero so page doesn’t feel split */
 body.home .scrolly-hero + .wrap{
   padding-top: 0;
 }
 
 body.home .scrolly-hero + .wrap > .card{
-  transform: translateY(-34px);
+  transform: translateY(-72px);
   position: relative;
   z-index: 3;
 }
 
-/* Scroll hint */
+/* Scroll hint stays visible and subtle */
 body.home .scroll-hint{
-  position: relative;
   width: 34px;
   height: 34px;
-  margin-top: 16px;
+  margin-top: 14px;
   opacity: 0.55;
+  position: relative;
 }
 
 body.home .scroll-hint::before{
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 4px;
-  width: 10px;
-  height: 10px;
-  border-right: 2px solid rgba(50,77,57,.55);
-  border-bottom: 2px solid rgba(50,77,57,.55);
+  content:"";
+  position:absolute;
+  left:50%;
+  top:4px;
+  width:10px;
+  height:10px;
+  border-right:2px solid rgba(50,77,57,.55);
+  border-bottom:2px solid rgba(50,77,57,.55);
   transform: translateX(-50%) rotate(45deg);
   animation: scrollHint 1.4s ease-in-out infinite;
 }
 
 @keyframes scrollHint{
-  0%   { transform: translate(-50%, 0) rotate(45deg); opacity: .25; }
-  50%  { transform: translate(-50%, 10px) rotate(45deg); opacity: .7; }
-  100% { transform: translate(-50%, 0) rotate(45deg); opacity: .25; }
+  0%   { transform: translate(-50%, 0) rotate(45deg); opacity:.25; }
+  50%  { transform: translate(-50%, 10px) rotate(45deg); opacity:.7; }
+  100% { transform: translate(-50%, 0) rotate(45deg); opacity:.25; }
 }
 
-/* Mobile tuning: avoid the “blank” feeling */
-@media (max-width: 560px){
+/* Mobile tuning: reduce lift slightly so it doesn’t collide */
+@media (max-width:560px){
+  body.home .scrolly-hero{
+    min-height: 92svh;
+  }
+
   body.home .scrolly-hero__media{
-    height: 100svh;
+    height: 92svh;
   }
 
   body.home .scrolly-hero__media img{
-    object-position: center 18%;
+    object-position: center 16%;
     transform: scale(1.06);
   }
 
   body.home .scrolly-hero__runway{
-    height: 34vh;
+    height: 18vh;
   }
 
   body.home .scrolly-hero + .wrap > .card{
-    transform: translateY(-18px);
+    transform: translateY(-42px);
   }
 }
