@@ -1,5 +1,5 @@
-/* ✅ FULL assets/style.css (copy + replace entire file)
-   Update included: ritual video + media/figure styling tightened and consistent
+/* FULL assets/style.css
+   Update included: Apple-style sticky scrolly hero + glass cards + fixed CSS error
 */
 
 :root{
@@ -33,6 +33,8 @@ body{
   max-width: 980px;
   margin: 0 auto;
   padding: 22px 18px 70px;
+  position: relative;
+  z-index: 2;
 }
 
 /* =========================
@@ -121,12 +123,21 @@ p, li{
    Cards / Layout
    ========================= */
 
+/* ✅ Glass cards so hero shows behind (premium feel) */
 .card{
-  background:var(--surface);
-  border:1px solid var(--line);
+  background: rgba(225,212,184,0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border:1px solid rgba(50,77,57,.18);
   border-radius:var(--radius);
   padding:30px;
   box-shadow:var(--shadow);
+}
+
+/* Pull first card slightly into hero like Apple */
+.card:first-of-type{
+  margin-top: -64px;
 }
 
 .grid{
@@ -213,12 +224,10 @@ input:focus{
    Media (images / video / figure)
    ========================= */
 
-/* Figure wrapper used across site */
 .media{
   margin: 18px 0;
 }
 
-/* Captions under images/video */
 .caption{
   margin-top: 10px;
   font-size: 14px;
@@ -226,7 +235,6 @@ input:focus{
   max-width: 720px;
 }
 
-/* Hero image block */
 .hero-img{
   margin-top:22px;
   border-radius:var(--radius);
@@ -239,14 +247,13 @@ input:focus{
   display:block;
 }
 
-/* Ritual video styling (autoplay-friendly + centered) */
 .ritual-video{
   width:100%;
-  max-width:420px;          /* ✅ smaller */
+  max-width:420px;
   aspect-ratio: 9 / 16;
   height:auto;
   display:block;
-  margin: 18px auto;        /* slightly less vertical space */
+  margin: 18px auto;
   border-radius:14px;
   border:1px solid rgba(0,0,0,0.12);
   box-shadow:0 10px 24px rgba(0,0,0,0.08);
@@ -272,13 +279,6 @@ input:focus{
   border-bottom:1px solid var(--line);
 }
 
-
-
-.carousel__stage{
-  display:flex;
-  justify-content:center;
-}
-
 /* =========================
    Carousel (no page-jump)
    ========================= */
@@ -287,35 +287,29 @@ input:focus{
   margin: 18px 0 6px;
 }
 
-/* Fixed stage height so page doesn't move */
 .carousel__stage {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 520px;      /* keep your half-size feel */
+  max-width: 520px;
   margin: 0 auto;
 
-  height: 340px;         /* desktop stage height (adjust if you want) */
+  height: 340px;
   border-radius: 14px;
-  overflow: hidden;      /* important: clips image edges */
+  overflow: hidden;
   border: 1px solid rgba(0,0,0,0.08);
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   background: rgba(255,255,255,0.12);
 }
 
-/* All carousel images fill the same stage */
 .carousel__stage img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;     /* crop to fill (prevents jumping) */
+  object-fit: cover;
   object-position: center;
 }
-
-/* If you prefer “no crop”, use contain instead:
-.carousel__stage img { object-fit: contain; background: rgba(255,255,255,0.12); }
-*/
 
 .carousel__controls {
   display: flex;
@@ -340,38 +334,6 @@ input:focus{
   transform: translateY(-1px);
 }
 
-/* Mobile: slightly taller stage (most images are portrait) */
-@media (max-width: 560px) {
-  .carousel__stage {
-    max-width: 100%;
-    height: 420px;       /* mobile stage height */
-    border-radius: 12px;
-  }
-}
-
-
-.carousel__controls{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  margin-top:10px;
-}
-
-.carousel__btn{
-  border:1px solid rgba(0,0,0,0.12);
-  background:rgba(255,255,255,0.35);
-  padding:10px 14px;
-  border-radius:999px;
-  cursor:pointer;
-  font:inherit;
-  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
-}
-
-.carousel__btn:hover{
-  background: rgba(70, 98, 78, 0.10); /* sage-ish hover */
-  border-color: rgba(70, 98, 78, 0.30);
-  transform: translateY(-1px);
-}
 /* Textual Begin link */
 .begin-link {
   display: inline-flex;
@@ -392,7 +354,7 @@ input:focus{
 .begin-link:hover {
   color: var(--muted);
   border-bottom-color: rgba(147,131,96,.7);
-  gap: 10px; /* arrow subtly moves right */
+  gap: 10px;
 }
 
 .begin-link .arrow {
@@ -430,24 +392,29 @@ input:focus{
   .brand img{ width:120px; }
   h1{ font-size:36px; }
 
-  /* Mobile refinement for ritual video */
   .ritual-video{
     max-width:100%;
     border-radius:12px;
   }
-   
+
+  .card:first-of-type{
+    margin-top: -36px;
+  }
 }
+
 /* =========================
    Apple-style sticky scrolly hero
    ========================= */
 
 .scrolly-hero{
   position: relative;
-  min-height: 92vh;          /* hero height */
+
+  /* This makes the hero feel alive while you scroll (Apple style) */
+  min-height: 120vh;
+
   overflow: clip;
 }
 
-/* Sticky media sits behind and stays while content scrolls */
 .scrolly-hero__media{
   position: sticky;
   top: 0;
@@ -456,25 +423,25 @@ input:focus{
   z-index: 0;
 }
 
-/* Use an <img> (better than background-attachment on iOS) */
 .scrolly-hero__media img{
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.03);    /* tiny premium “fill” */
+
+  /* Tiny premium fill */
+  transform: scale(1.03);
 }
 
-/* Wash for readability (like Apple’s subtle overlays) */
 .scrolly-hero__wash{
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(230,218,200,.92) 0%,
-    rgba(230,218,200,.72) 45%,
-    rgba(230,218,200,.94) 100%
+    rgba(230,218,200,.86) 0%,
+    rgba(230,218,200,.55) 45%,
+    rgba(230,218,200,.90) 100%
   );
 }
 
@@ -486,23 +453,21 @@ input:focus{
   padding-bottom: 28px;
 }
 
-/* Optional: pull H1 down a touch so it feels “hero” */
 .scrolly-hero h1{
   margin: 0 0 10px;
 }
 
-/* Make the hero feel like it continues as you scroll */
-@media (min-width: 900px){
-  .scrolly-hero{
-    min-height: 110vh;  /* gives the sticky image time to “live” */
-  }
+/* The runway is the “scroll space” that makes the image feel like it moves slower */
+.scrolly-hero__runway{
+  height: 56vh;
 }
 
 /* Mobile tuning */
 @media (max-width: 560px){
   .scrolly-hero{
-    min-height: 86vh;
+    min-height: 105vh;
   }
-}
-
+  .scrolly-hero__runway{
+    height: 42vh;
+  }
 }
