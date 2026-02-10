@@ -1,13 +1,15 @@
 /* FULL assets/style.css
-   Stable base styling + Apple-style sticky scrolly hero (index only) + glass cards (no overlap)
+   Baseline site styling + Carousel + Ritual video
+   PLUS: HOME ONLY Apple-style sticky scrolly hero + glass cards + safe lift (no overlap)
 */
 
 :root{
-  --bg:#E6DAC8;
-  --surface:#E1D4B8;
-  --ink:#324D39;
-  --muted:#62735D;
-  --accent:#938360;
+  /* Refined brand palette */
+  --bg:#E6DAC8;              /* site background */
+  --surface:#E1D4B8;         /* calmer card tone */
+  --ink:#324D39;             /* deep green */
+  --muted:#62735D;           /* sage */
+  --accent:#938360;          /* clay */
   --line:rgba(50,77,57,.22);
 
   --radius:20px;
@@ -27,16 +29,11 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* =========================
-   Layout container
-   ========================= */
-
+/* Layout container */
 .wrap{
   max-width: 980px;
   margin: 0 auto;
   padding: 22px 18px 70px;
-  position: relative;
-  z-index: 2; /* keep content above sticky media */
 }
 
 /* =========================
@@ -85,6 +82,7 @@ body{
   text-decoration:none;
   border-bottom:1px solid transparent;
 }
+
 .nav a:hover{
   color:var(--ink);
   border-bottom:1px solid var(--line);
@@ -135,35 +133,12 @@ p, li{
    Cards / Layout
    ========================= */
 
-/* Glass card base (works everywhere) */
 .card{
-  background: rgba(225,212,184,0.74);
-  border:1px solid rgba(50,77,57,.18);
+  background:var(--surface);
+  border:1px solid var(--line);
   border-radius:var(--radius);
   padding:30px;
   box-shadow:var(--shadow);
-}
-
-/* Only blur if supported (prevents odd rendering on some browsers) */
-@supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))){
-  .card{
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
-}
-
-/* ✅ Lift ONLY the first card after the hero on index
-   Keep it modest to avoid collisions on different screen heights. */
-.scrolly-hero + .wrap > .card{
-  margin-top: -40px;   /* reduced to stop overlap */
-  position: relative;
-  z-index: 3;
-}
-
-/* Ensure anything after the first card never “slides under” it */
-.scrolly-hero + .wrap > .card + *{
-  position: relative;
-  z-index: 2;
 }
 
 .grid{
@@ -187,6 +162,7 @@ a{
   text-decoration:none;
   border-bottom:1px solid rgba(147,131,96,.35);
 }
+
 a:hover{
   border-bottom-color:rgba(147,131,96,.7);
 }
@@ -219,30 +195,30 @@ a:hover{
 
 /* Textual Begin link */
 .begin-link{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 
-  font-size:18px;
-  font-weight:500;
-  color:var(--ink);
-  text-decoration:none;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
 
-  border-bottom:1px solid rgba(147,131,96,.35);
-  padding-bottom:2px;
+  border-bottom: 1px solid rgba(147,131,96,.35);
+  padding-bottom: 2px;
 
   transition: color .15s ease, border-color .15s ease, gap .15s ease;
 }
 
 .begin-link:hover{
-  color:var(--muted);
+  color: var(--muted);
   border-bottom-color: rgba(147,131,96,.7);
-  gap:10px;
+  gap: 10px;
 }
 
 .begin-link .arrow{
-  font-size:18px;
-  line-height:1;
+  font-size: 18px;
+  line-height: 1;
 }
 
 /* =========================
@@ -264,28 +240,28 @@ input:focus{
 }
 
 .form-embed{
-  margin-top:18px;
+  margin-top: 18px;
 }
 
 .form-embed iframe{
-  width:100%;
-  height:680px;
-  border:none;
-  border-radius:14px;
-  background:#ffffff;
+  width: 100%;
+  height: 680px;
+  border: none;
+  border-radius: 14px;
+  background: #ffffff;
 }
 
 /* =========================
    Media (images / video / figure)
    ========================= */
 
-.media{ margin:18px 0; }
+.media{ margin: 18px 0; }
 
 .caption{
-  margin-top:10px;
-  font-size:14px;
-  color:var(--muted);
-  max-width:720px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 720px;
 }
 
 .hero-img{
@@ -295,6 +271,7 @@ input:focus{
   box-shadow:var(--shadow);
   overflow:hidden;
 }
+
 .hero-img img{
   width:100%;
   display:block;
@@ -306,7 +283,7 @@ input:focus{
   aspect-ratio: 9 / 16;
   height:auto;
   display:block;
-  margin:18px auto;
+  margin: 18px auto;
   border-radius:14px;
   border:1px solid rgba(0,0,0,0.12);
   box-shadow:0 10px 24px rgba(0,0,0,0.08);
@@ -323,10 +300,12 @@ input:focus{
   font-size:13px;
   color:var(--muted);
 }
+
 .footer a{
   color:var(--muted);
   border-bottom:1px solid transparent;
 }
+
 .footer a:hover{
   color:var(--ink);
   border-bottom:1px solid var(--line);
@@ -336,7 +315,7 @@ input:focus{
    Carousel (no page-jump)
    ========================= */
 
-.carousel{ margin:18px 0 6px; }
+.carousel{ margin: 18px 0 6px; }
 
 .carousel__stage{
   display:flex;
@@ -350,7 +329,7 @@ input:focus{
   border-radius:14px;
   overflow:hidden;
   border:1px solid rgba(0,0,0,0.08);
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
   background: rgba(255,255,255,0.12);
 }
 
@@ -386,64 +365,6 @@ input:focus{
 }
 
 /* =========================
-   Apple-style sticky scrolly hero (Index)
-   ========================= */
-
-/* The hero section creates the “slow image” feel using sticky media */
-.scrolly-hero{
-  position: relative;
-  overflow: clip;
-
-  /* creates a controlled runway without forcing blank space above */
-  padding-bottom: 55vh;
-}
-
-/* Sticky media behind content */
-.scrolly-hero__media{
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: 0;
-}
-
-.scrolly-hero__media img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center 35%;
-  transform: scale(1.03);
-}
-
-.scrolly-hero__wash{
-  position:absolute;
-  inset:0;
-  background: linear-gradient(
-    to bottom,
-    rgba(230,218,200,.80) 0%,
-    rgba(230,218,200,.52) 45%,
-    rgba(230,218,200,.90) 100%
-  );
-}
-
-/* Content sits above sticky image (no flex pushing it down) */
-.scrolly-hero__content{
-  position: relative;
-  z-index: 1;
-
-  padding-top: calc(18px + env(safe-area-inset-top));
-  padding-bottom: 10px;
-
-  display:block;
-}
-
-.scrolly-hero h1{
-  margin: 6px 0 0;
-}
-
-/* =========================
    Responsive
    ========================= */
 
@@ -467,26 +388,135 @@ input:focus{
     border-radius:12px;
   }
 
-  /* Mobile hero: reduce runway + move subject up */
-  .scrolly-hero{
-    padding-bottom: 38vh;
-  }
-
-  .scrolly-hero__media img{
-    object-position:center 22%;
-  }
-
-  /* Softer lift on small screens */
-  .scrolly-hero + .wrap > .card{
-    margin-top: -22px;
-  }
-}
-
-/* Mobile carousel stage tuning */
-@media (max-width:560px){
   .carousel__stage{
     max-width:100%;
     height:420px;
     border-radius:12px;
+  }
+}
+
+/* ==========================================================
+   HOME ONLY: Apple-style sticky scrolly hero + glass cards
+   Requires: <body class="home"> (you already have this)
+   ========================================================== */
+
+/* Hero wrapper */
+body.home .scrolly-hero{
+  position: relative;
+  overflow: clip;
+}
+
+/* Sticky background layer */
+body.home .scrolly-hero__media{
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+  z-index: 0;
+}
+
+body.home .scrolly-hero__media img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position: center 30%;
+  transform: scale(1.04);
+}
+
+/* Readability wash */
+body.home .scrolly-hero__wash{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    to bottom,
+    rgba(230,218,200,.82) 0%,
+    rgba(230,218,200,.55) 45%,
+    rgba(230,218,200,.90) 100%
+  );
+}
+
+/* Hero content */
+body.home .scrolly-hero__content{
+  position: relative;
+  z-index: 1;
+  padding-top: calc(18px + env(safe-area-inset-top));
+  padding-bottom: 10px;
+}
+
+body.home .scrolly-hero h1{
+  margin: 6px 0 0;
+}
+
+/* The runway creates the “Apple slow scroll” feel */
+body.home .scrolly-hero__runway{
+  height: 55vh;
+}
+
+/* Glass cards (only on home so other pages keep solid cards) */
+body.home .card{
+  background: rgba(225,212,184,0.72);
+  border:1px solid rgba(50,77,57,.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Lift the first card safely (no overlap issues) */
+body.home .scrolly-hero + .wrap{
+  padding-top: 0;
+}
+
+body.home .scrolly-hero + .wrap > .card{
+  transform: translateY(-34px);
+  position: relative;
+  z-index: 3;
+}
+
+/* Scroll hint */
+body.home .scroll-hint{
+  position: relative;
+  width: 34px;
+  height: 34px;
+  margin-top: 16px;
+  opacity: 0.55;
+}
+
+body.home .scroll-hint::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid rgba(50,77,57,.55);
+  border-bottom: 2px solid rgba(50,77,57,.55);
+  transform: translateX(-50%) rotate(45deg);
+  animation: scrollHint 1.4s ease-in-out infinite;
+}
+
+@keyframes scrollHint{
+  0%   { transform: translate(-50%, 0) rotate(45deg); opacity: .25; }
+  50%  { transform: translate(-50%, 10px) rotate(45deg); opacity: .7; }
+  100% { transform: translate(-50%, 0) rotate(45deg); opacity: .25; }
+}
+
+/* Mobile tuning: avoid the “blank” feeling */
+@media (max-width: 560px){
+  body.home .scrolly-hero__media{
+    height: 100svh;
+  }
+
+  body.home .scrolly-hero__media img{
+    object-position: center 18%;
+    transform: scale(1.06);
+  }
+
+  body.home .scrolly-hero__runway{
+    height: 34vh;
+  }
+
+  body.home .scrolly-hero + .wrap > .card{
+    transform: translateY(-18px);
   }
 }
