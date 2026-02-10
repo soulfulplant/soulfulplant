@@ -126,8 +126,8 @@ p, li{
 /* ✅ Glass cards so hero shows behind (premium feel) */
 .card{
   background: rgba(225,212,184,0.72);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   border:1px solid rgba(50,77,57,.18);
   border-radius:var(--radius);
@@ -135,9 +135,11 @@ p, li{
   box-shadow:var(--shadow);
 }
 
-/* Pull first card slightly into hero like Apple */
-.card:first-of-type{
+/* Only lift the FIRST card inside the main content wrap (prevents grid overlap) */
+.wrap > .card{
   margin-top: -64px;
+  position: relative;
+  z-index: 3;
 }
 
 .grid{
