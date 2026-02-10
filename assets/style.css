@@ -429,7 +429,7 @@ body.home .scrolly-hero__content{
 
 /* Runway still exists, but smaller — it just gives that “slow image” feel */
 body.home .scrolly-hero__runway{
-  height: 98vh;
+  height: 8vh;
 }
 
 /* =========================
