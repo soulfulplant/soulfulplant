@@ -145,7 +145,7 @@ p, li{
 
 /* Lift ONLY the first card on the homepage so it overlaps hero nicely (no grid overlap) */
 body.home .scrolly-hero + .wrap > .card{
-  margin-top: -75px;
+  margin-top: -95px;
   position: relative;
   z-index: 3;
 }
