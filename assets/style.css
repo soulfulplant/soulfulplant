@@ -1,6 +1,5 @@
 /* FULL assets/style.css
-   Keeps your existing site styling intact.
-   Adds: index-only (body.home) Apple-style scrolly hero + glass cards + safe card lift.
+   Apple-style sticky scrolly hero + glass cards (index only lift) + keeps all site styling intact
 */
 
 :root{
@@ -16,6 +15,7 @@
 }
 
 *{ box-sizing:border-box; }
+
 html, body { height: 100%; }
 
 body{
@@ -27,12 +27,13 @@ body{
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 🔽 Reduced top padding */
+/* Layout container */
 .wrap{
   max-width: 980px;
   margin: 0 auto;
   padding: 22px 18px 70px;
   position: relative;
+  z-index: 2;
 }
 
 /* =========================
@@ -116,23 +117,44 @@ p, li{
   color:var(--muted);
 }
 
+.fine{
+  font-size:14px;
+  color:var(--muted);
+}
+
+.note{
+  border-left:3px solid rgba(147,131,96,.55);
+  padding-left:14px;
+  color:var(--muted);
+}
+
 /* =========================
    Cards / Layout
    ========================= */
 
+/* Glass feel (works great with hero behind) */
 .card{
-  background:var(--surface);
-  border:1px solid var(--line);
+  background: rgba(225,212,184,0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border:1px solid rgba(50,77,57,.18);
   border-radius:var(--radius);
   padding:30px;
   box-shadow:var(--shadow);
+}
+
+/* ✅ IMPORTANT: only lift the first card on pages where scrolly hero exists (Index) */
+.scrolly-hero + .wrap > .card{
+  margin-top: -64px;
+  position: relative;
+  z-index: 3;
 }
 
 .grid{
   display:grid;
   grid-template-columns: 1.1fr .9fr;
   gap:18px;
-  align-items:start;
 }
 
 hr{
@@ -169,43 +191,44 @@ a:hover{
   background:rgba(50,77,57,.14);
   box-shadow:0 12px 28px rgba(0,0,0,.12);
 }
+
 .btn-primary:hover{
   background:rgba(98,115,93,.35);
   border-color:rgba(98,115,93,.55);
   transform:translateY(-1px);
 }
-.btn-primary:active{ transform:none; }
 
-.fine{
-  font-size:14px;
-  color:var(--muted);
-}
-
-.note{
-  border-left:3px solid rgba(147,131,96,.55);
-  padding-left:14px;
-  color:var(--muted);
+.btn-primary:active{
+  transform:none;
 }
 
 /* Textual Begin link */
 .begin-link{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  font-size:18px;
-  font-weight:500;
-  color:var(--ink);
-  text-decoration:none;
-  border-bottom:1px solid rgba(147,131,96,.35);
-  padding-bottom:2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+
+  border-bottom: 1px solid rgba(147,131,96,.35);
+  padding-bottom: 2px;
+
   transition: color .15s ease, border-color .15s ease, gap .15s ease;
 }
+
 .begin-link:hover{
-  color:var(--muted);
+  color: var(--muted);
   border-bottom-color: rgba(147,131,96,.7);
-  gap:10px;
+  gap: 10px;
 }
-.begin-link .arrow{ font-size:18px; line-height:1; }
+
+.begin-link .arrow{
+  font-size: 18px;
+  line-height: 1;
+}
 
 /* =========================
    Forms
@@ -224,25 +247,28 @@ input:focus{
   border-color:rgba(147,131,96,.65);
 }
 
-.form-embed { margin-top:18px; }
+.form-embed{
+  margin-top: 18px;
+}
 .form-embed iframe{
-  width:100%;
-  height:680px;
-  border:none;
-  border-radius:14px;
-  background:#ffffff;
+  width: 100%;
+  height: 680px;
+  border: none;
+  border-radius: 14px;
+  background: #ffffff;
 }
 
 /* =========================
    Media (images / video / figure)
    ========================= */
 
-.media{ margin:18px 0; }
+.media{ margin: 18px 0; }
+
 .caption{
-  margin-top:10px;
-  font-size:14px;
-  color:var(--muted);
-  max-width:720px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 720px;
 }
 
 .hero-img{
@@ -252,7 +278,10 @@ input:focus{
   box-shadow:var(--shadow);
   overflow:hidden;
 }
-.hero-img img{ width:100%; display:block; }
+.hero-img img{
+  width:100%;
+  display:block;
+}
 
 .ritual-video{
   width:100%;
@@ -260,7 +289,7 @@ input:focus{
   aspect-ratio: 9 / 16;
   height:auto;
   display:block;
-  margin:18px auto;
+  margin: 18px auto;
   border-radius:14px;
   border:1px solid rgba(0,0,0,0.12);
   box-shadow:0 10px 24px rgba(0,0,0,0.08);
@@ -290,7 +319,7 @@ input:focus{
    Carousel (no page-jump)
    ========================= */
 
-.carousel{ margin:18px 0 6px; }
+.carousel{ margin: 18px 0 6px; }
 
 .carousel__stage{
   display:flex;
@@ -332,10 +361,75 @@ input:focus{
   font:inherit;
   transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
 }
+
 .carousel__btn:hover{
   background: rgba(70, 98, 78, 0.10);
   border-color: rgba(70, 98, 78, 0.30);
   transform: translateY(-1px);
+}
+
+/* =========================
+   Apple-style sticky scrolly hero (Index)
+   ========================= */
+
+.scrolly-hero{
+  position: relative;
+
+  /* “Runway” scroll space like Apple */
+  min-height: 120vh;
+
+  overflow: clip;
+}
+
+.scrolly-hero__media{
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: 100%;
+  z-index: 0;
+}
+
+.scrolly-hero__media img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* default crop */
+  object-position: center;
+
+  transform: scale(1.03);
+}
+
+.scrolly-hero__wash{
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(230,218,200,.86) 0%,
+    rgba(230,218,200,.55) 45%,
+    rgba(230,218,200,.90) 100%
+  );
+}
+
+.scrolly-hero__content{
+  position: relative;
+  z-index: 1;
+
+  /* ensure the header + H1 are visible on load */
+  min-height: 100svh;
+
+  padding-top: 22px;
+  padding-bottom: 28px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.scrolly-hero h1{
+  margin: 0 0 10px;
 }
 
 /* =========================
@@ -355,77 +449,40 @@ input:focus{
   }
   .brand img{ width:120px; }
   h1{ font-size:36px; }
-  .ritual-video{ max-width:100%; border-radius:12px; }
-  .carousel__stage{ height:420px; max-width:100%; border-radius:12px; }
-}
 
-/* =========================================================
-   ✅ INDEX ONLY (body.home): Apple-style sticky scrolly hero
-   ========================================================= */
+  .ritual-video{
+    max-width:100%;
+    border-radius:12px;
+  }
 
-/* Glass cards only on the homepage (so Begin page stays normal) */
-body.home .card{
-  background: rgba(225,212,184,0.72);
-  border:1px solid rgba(50,77,57,.18);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
+  .carousel__stage{
+    max-width: 100%;
+    height: 420px;
+    border-radius: 12px;
+  }
 
-/* Only lift the first card on the homepage, and only when it’s directly under the hero */
-body.home .scrolly-hero + .wrap > .card{
-  margin-top: -64px;
-  position: relative;
-  z-index: 3;
-}
+  /* Mobile hero: reduce “blank” feel by shifting crop upward */
+  .scrolly-hero{
+    min-height: 105svh;
+  }
 
-/* Hero container */
-body.home .scrolly-hero{
-  position: relative;
-  min-height: 120vh;   /* “runway” to feel Apple-ish */
-  overflow: clip;
-}
+  .scrolly-hero__media{
+    height: 100svh;
+  }
 
-/* Sticky image layer */
-body.home .scrolly-hero__media{
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: 0;
-}
+  .scrolly-hero__media img{
+    object-position: center 22%;
+  }
 
-body.home .scrolly-hero__media img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit: cover;
-  transform: scale(1.03);
-}
+  /* Lift less on mobile so it doesn’t feel like a blank page */
+  .scrolly-hero + .wrap > .card{
+    margin-top: -36px;
+  }
 
-body.home .scrolly-hero__wash{
-  position:absolute;
-  inset:0;
-  background: linear-gradient(
-    to bottom,
-    rgba(230,218,200,.86) 0%,
-    rgba(230,218,200,.55) 45%,
-    rgba(230,218,200,.90) 100%
-  );
-}
-
-/* Content above the image */
-body.home .scrolly-hero__content{
-  position: relative;
-  z-index: 1;
-  padding-top: 22px;
-  padding-bottom: 28px;
-}
-
-body.home .scrolly-hero h1{ margin:0 0 10px; }
-
-/* Mobile tuning for the homepage hero lift */
-@media (max-width:560px){
-  body.home .scrolly-hero{ min-height:105vh; }
-  body.home .scrolly-hero + .wrap > .card{ margin-top:-36px; }
+  /* On mobile, don’t push content too far down */
+  .scrolly-hero__content{
+    justify-content: flex-end;
+    padding-top: 16px;
+    padding-bottom: 18px;
+  }
 }
