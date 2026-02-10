@@ -134,9 +134,9 @@ p, li{
    ========================= */
 
 .card{
-  background: rgba(225,212,184,0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(225,212,184,0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border:1px solid rgba(50,77,57,.18);
   border-radius:var(--radius);
   padding:30px;
@@ -145,7 +145,7 @@ p, li{
 
 /* Lift ONLY the first card on the homepage so it overlaps hero nicely (no grid overlap) */
 body.home .scrolly-hero + .wrap > .card{
-  margin-top: -56px;
+  margin-top: -75px;
   position: relative;
   z-index: 3;
 }
