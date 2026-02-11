@@ -1,7 +1,5 @@
 /* FULL assets/style.css
-   FIX: Home hero no longer creates blank space (sticky -> fixed background layer)
-   Keeps all existing site styling intact + glass cards
-*/
+   */
 
 :root{
   --bg:#E6DAC8;
@@ -130,11 +128,11 @@ p, li{
 }
 
 /* =========================
-   Cards / Layout
+   s / Layout
    ========================= */
 
 .card{
-  background: rgba(225,212,184,0.55);
+  background: rgba(225,212,184,0.40);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border:1px solid rgba(50,77,57,.18);
