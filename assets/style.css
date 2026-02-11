@@ -387,7 +387,7 @@ body.home .scrolly-hero__media img{
   height: 100%;
   object-fit: cover;
   transform: scale(1);
-  object-position: center 2%;
+  object-position: center 35%;
 }
 
 /* Wash overlay for legibility */
@@ -508,7 +508,7 @@ body.home .scrolly-hero__runway{
   }
 
   body.home .scrolly-hero__media img{
-    object-position: center 5%;
+    object-position: center 35%;
   }
 
   body.home .scrolly-hero__runway{
